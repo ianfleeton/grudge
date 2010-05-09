@@ -1,0 +1,9 @@
+.classpath
+.project
+.settings
+/*.launch
+stacktrace.log
+/test/reports
+*.war
+/target
+/grails-app/conf/DataSource.groovy
