@@ -46,14 +46,14 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="diagram.logicalSpecification.label" default="Logical Specification" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: diagramInstance, field: "logicalSpecification")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: diagramInstance, field: "logicalSpecification").encodeAsNL2BR()}</td>
                             
                         </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="diagram.layoutSpecification.label" default="Layout Specification" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: diagramInstance, field: "layoutSpecification")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: diagramInstance, field: "layoutSpecification").encodeAsNL2BR()}</td>
                             
                         </tr>
                     
