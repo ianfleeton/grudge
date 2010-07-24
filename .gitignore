@@ -7,3 +7,4 @@ stacktrace.log
 *.war
 /target
 /grails-app/conf/DataSource.groovy
+/*.png
