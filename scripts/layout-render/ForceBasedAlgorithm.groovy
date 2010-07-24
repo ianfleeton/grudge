@@ -86,16 +86,16 @@ class ForceBasedAlgorithm {
             }
 
             if(totalKineticEnergy < negligibleKineticEnergy) {
-                println "Quitting due to no energy"
+                // Quitting due to no energy
                 break
             }
             if(timeCheck > 15000) {
-                println "Quitting due to time check"
+                // Quitting due to time check
                 break
             }
         }
         def endTime = System.currentTimeMillis()
-        println "Running time ${endTime-startTime}ms"
+        //println "Running time ${endTime-startTime}ms"
         snapNodesToGrid()
     }
 
