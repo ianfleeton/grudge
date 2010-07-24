@@ -14,14 +14,15 @@
 * limitations under the License.
 */
 
-parser = new SpecificationParser()
-parser.parse(logicalSpecification)
+try {
+    parser = new SpecificationParser()
+    parser.parse(layoutSpecification)
+}
+catch(ex) {
+    println "Parse error"
+    return 1
+}
 diagramSpec = parser.diagramSpecification
-
-println "Running force-based algorithm"
-
-algorithm = new ForceBasedAlgorithm()
-algorithm.layout(diagramSpec)
 
 renderer = new DiagramRenderer()
 if(args.length) {

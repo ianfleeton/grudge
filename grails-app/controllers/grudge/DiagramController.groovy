@@ -29,7 +29,8 @@ class DiagramController {
             return
         }
 
-        layoutRender(diagramInstance)
+        layoutDiagram(diagramInstance)
+        renderDiagram(diagramInstance)
 
         if (diagramInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'diagram.label', default: 'Diagram'), diagramInstance.id])}"
@@ -40,15 +41,23 @@ class DiagramController {
         }
     }
 
-    def layoutRender(diagramInstance) {
-        String[] roots =  ['scripts/layout-render']
+    def layoutDiagram(diagramInstance) {
+        String[] roots = ['scripts/layout-render']
+        def gse = new GroovyScriptEngine(roots)
+        Binding binding = new Binding()
+        binding.setVariable("logicalSpecification", diagramInstance.logicalSpecification)
+        diagramInstance.layoutSpecification = gse.run('Layout.groovy', binding)
+    }
+
+    def renderDiagram(diagramInstance) {
+        String[] roots = ['scripts/layout-render']
         def gse = new GroovyScriptEngine(roots)
         Binding binding = new Binding()
         def filename = diagramInstance.logicalSpecificationHash + '.png'
         String[] args = [filename]
         binding.setVariable("args", args)
-        binding.setVariable("logicalSpecification", diagramInstance.logicalSpecification)
-        gse.run('LayoutRender.groovy', binding)
+        binding.setVariable("layoutSpecification", diagramInstance.layoutSpecification)
+        gse.run('Render.groovy', binding)
     }
 
     def show = {
