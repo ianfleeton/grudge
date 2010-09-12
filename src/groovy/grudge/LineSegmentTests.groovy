@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 
+package grudge
+
 class LineSegmentTests extends GroovyTestCase {
     def ls1, ls2, ls3, ls4, ls5
 

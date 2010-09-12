@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 
+package grudge
+
 class SpecificationParser {
     def elementsMap = [:]
     def diagramSpecification

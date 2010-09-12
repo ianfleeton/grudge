@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 
+package grudge
+
 try {
     parser = new SpecificationParser()
     parser.parse(logicalSpecification)

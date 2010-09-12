@@ -42,22 +42,41 @@ class DiagramController {
     }
 
     def layoutDiagram(diagramInstance) {
-        String[] roots = ['scripts/layout-render']
-        def gse = new GroovyScriptEngine(roots)
-        Binding binding = new Binding()
-        binding.setVariable("logicalSpecification", diagramInstance.logicalSpecification)
-        diagramInstance.layoutSpecification = gse.run('Layout.groovy', binding)
+        def parser = new SpecificationParser()
+        try {
+            parser.parse(diagramInstance.logicalSpecification)
+        }
+        catch(ex) {
+            println "Parse error in logical specification"
+            return 1
+        }
+        def diagramSpec = parser.diagramSpecification
+
+        def algorithm = new ForceBasedAlgorithm()
+        algorithm.layout(diagramSpec)
+
+        def writer = new SpecificationWriter()
+        def buf = new ByteArrayOutputStream()
+        def originalOut = System.out
+        System.out = new PrintStream(buf)
+        writer.write(diagramSpec)
+        diagramInstance.layoutSpecification = buf.toString()
+        System.out = originalOut
     }
 
     def renderDiagram(diagramInstance) {
-        String[] roots = ['scripts/layout-render']
-        def gse = new GroovyScriptEngine(roots)
-        Binding binding = new Binding()
-        def filename = diagramInstance.logicalSpecificationHash + '.png'
-        String[] args = [filename]
-        binding.setVariable("args", args)
-        binding.setVariable("layoutSpecification", diagramInstance.layoutSpecification)
-        gse.run('Render.groovy', binding)
+        def parser = new SpecificationParser()
+        try {
+            parser.parse(diagramInstance.layoutSpecification)
+        }
+        catch(ex) {
+            println "Parse error in layout specification"
+            return 1
+        }
+
+        def renderer = new DiagramRenderer()
+        renderer.filename = diagramInstance.logicalSpecificationHash + '.png'
+        renderer.render(parser.diagramSpecification)
     }
 
     def show = {

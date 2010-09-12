@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 
+package grudge
+
 class LineSegment {
     def p1
     def p2

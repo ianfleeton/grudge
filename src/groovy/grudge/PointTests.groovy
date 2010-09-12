@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 
+package grudge
+
 class PointTests extends GroovyTestCase {
     def p1, p2
 

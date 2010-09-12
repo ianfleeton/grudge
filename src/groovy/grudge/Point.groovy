@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 
+package grudge
+
 class Point implements Cloneable {
     def x
     def y

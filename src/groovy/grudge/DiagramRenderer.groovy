@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 
+package grudge
+
 import java.awt.image.*
 import javax.imageio.*
 import javax.imageio.ImageIO

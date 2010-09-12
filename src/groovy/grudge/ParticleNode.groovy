@@ -16,6 +16,8 @@
 
 // ParticleNode wraps a UMLClassElement in a force-based algorithm
 
+package grudge
+
 class ParticleNode {
     def velocity
     def umlClassElement

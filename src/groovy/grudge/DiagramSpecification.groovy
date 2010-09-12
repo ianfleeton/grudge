@@ -14,6 +14,8 @@
 * limitations under the License.
 */
 
+package grudge
+
 class DiagramSpecification {
     def title = 'Untitled'
     def umlClassElements = []
