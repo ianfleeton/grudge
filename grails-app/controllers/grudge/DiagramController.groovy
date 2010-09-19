@@ -2,7 +2,7 @@ package grudge
 
 class DiagramController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST", redraw: "POST"]
 
     def index = {
         redirect(action: "list", params: params)
@@ -39,6 +39,22 @@ class DiagramController {
         else {
             render(view: "create", model: [diagramInstance: diagramInstance])
         }
+    }
+
+    def redraw = {
+        def diagramInstance = Diagram.get(params.id)
+        if (!diagramInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'diagram.label', default: 'Diagram'), params.id])}"
+            redirect(action: "list")
+            return
+        }
+
+        def f = new File(diagramInstance.logicalSpecificationHash + '.png')
+        f.delete()
+
+        renderDiagram(diagramInstance)
+
+        redirect(action: "show", id: diagramInstance.id)
     }
 
     def layoutDiagram(diagramInstance) {
