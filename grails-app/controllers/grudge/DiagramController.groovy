@@ -1,4 +1,5 @@
 package grudge
+import grails.converters.*
 
 class DiagramController {
 
@@ -102,7 +103,10 @@ class DiagramController {
             redirect(action: "list")
         }
         else {
-            [diagramInstance: diagramInstance]
+            withFormat {
+                html diagramInstance:diagramInstance
+                xml { render diagramInstance as XML }
+            }
         }
     }
 
